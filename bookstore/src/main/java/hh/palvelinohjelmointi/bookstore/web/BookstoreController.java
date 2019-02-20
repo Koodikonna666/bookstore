@@ -12,14 +12,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import hh.palvelinohjelmointi.bookstore.domain.Book;
 import hh.palvelinohjelmointi.bookstore.domain.BookRepository;
+import hh.palvelinohjelmointi.bookstore.domain.CategoryRepository;
 
 @Controller
 public class BookstoreController {
 
 	@Autowired
-	BookRepository bookRepository;
+	private BookRepository bookRepository;
 	
-	
+	@Autowired
+	private CategoryRepository crepository; 
 	
 	//autolistaus
 	@RequestMapping(value= "/books", method=RequestMethod.GET)
@@ -34,6 +36,7 @@ public class BookstoreController {
 	@RequestMapping(value= "/addbook", method=RequestMethod.GET)
 	public String getNewBookForm(Model model) {
 		model.addAttribute("book", new Book());
+		model.addAttribute("category", crepository.findAll());
 		return "addbook";
 	}
 	
