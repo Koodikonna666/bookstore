@@ -6,6 +6,10 @@
 </head>
 <body>
 
+<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-danger"/>
+		</form>
+
 	<h1>Books</h1>
 	
 	<table>
@@ -23,7 +27,7 @@
 			<th th:text="${book.isbn}"></th>
 			<th th:text="${book.year}"></th>
 			<th th:text="${book.category.name}"></th>
-			<th sec:authorize="hasRole('ADMIN')"><a th:href="@{/deletebook/{id}(id=${book.id})}">Delete</a></th>
+			<th sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletebook/{id}(id=${book.id})}">Delete</a></th>
 		</tr>
 	
 	</table>
